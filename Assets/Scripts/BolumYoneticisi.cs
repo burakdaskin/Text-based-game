@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class BolumYoneticisi : MonoBehaviour
 {
-    public void BolumAc(string BolumIsmi)
+    public void BolumAc(string BolumIsmi) //buton komponentine OnClick icinde atanan script 
     {
         SceneManager.LoadScene(BolumIsmi);
     }
-    public void Cikis()
+    public void Cikis() //cikis tiklayinca oyundan cikiyor
     {
         Application.Quit();
     }

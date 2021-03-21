@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.SceneManagement; // SceneManager kullanmak icin
+using TMPro; // text mesh pro kullanmak icin
 
 public class TextSc : MonoBehaviour
 {
-    public TextMeshProUGUI yazi;
-    private enum Bolumler {orman, yol_1, yol_2, yol_3, aslan, yilan, nehir, bahce};
-    private Bolumler aktifBolum;
+    public TextMeshProUGUI yazi;//textmeshpro kullanimi
+    private enum Bolumler {orman, yol_1, yol_2, yol_3, aslan, yilan, nehir, bahce}; //bolumleri belirliyor
+    private Bolumler aktifBolum; //aktif olan bolumu tanimliyor
 
     void Start()
     {
-        aktifBolum = Bolumler.orman;
+        aktifBolum = Bolumler.orman; //baslangicta orman bolumunden basliyor
     }
 
     void Update()
     {
-        if (aktifBolum==Bolumler.orman)
+        if (aktifBolum==Bolumler.orman) //eger orman bolumu aktif ise bolum_orman methodunu cagiriyor
         {
             bolum_orman();
         }
@@ -54,7 +54,7 @@ public class TextSc : MonoBehaviour
     void bolum_orman()
     {
         yazi.text = "Gözlerini karanlýk ve ýssýz bir ormanda açtýn. \nOrmandan çýkmak için önünde 3 yol var:\nBirinci yol için 1'e, ikinci yol için 2'ye, üçüncü yol için 3'e bas!";
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // eger 1'e basarsan yol_1 bolumunu cagiriyor
         {
             aktifBolum = Bolumler.yol_1;
         }
@@ -116,7 +116,7 @@ public class TextSc : MonoBehaviour
     void bolum_aslan()
     {
         yazi.text = "Aslana kafa tutacak kadar aptal olduðunu bilmiyordum. Aslan seni bir lokmada yuttu.";
-        StartCoroutine(GeciktirKaybet());
+        StartCoroutine(GeciktirKaybet()); 
     }
     void bolum_yilan()
     {
@@ -134,12 +134,12 @@ public class TextSc : MonoBehaviour
         yazi.text = "Açlýða dayanýrsýn ama susuzluða o kadar deðil. Karnýný doyurdun ama ormandan çýkamadan susuzluða yenildin.";
         StartCoroutine(GeciktirKaybet());
     }
-    IEnumerator GeciktirKaybet()
+    IEnumerator GeciktirKaybet() //bolum bitiminde 3 saniye bekleyip kaybetme sahnesini cagiriyor
     {
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("Lose");
+        yield return new WaitForSeconds(3); //3 sn bekletiyor
+        SceneManager.LoadScene("Lose"); //sahne yoneticisi Lose sahnesini yukluyor
     }
-    IEnumerator GeciktirKazan()
+    IEnumerator GeciktirKazan()//bolum bitiminde 3 saniye bekleyip kazanma sahnesini cagiriyor
     {
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("Win");
